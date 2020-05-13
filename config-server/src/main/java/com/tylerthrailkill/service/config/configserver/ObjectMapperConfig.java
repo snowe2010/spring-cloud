@@ -14,21 +14,12 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
-@SuppressWarnings("Duplicates")
 @Configuration
 public class ObjectMapperConfig {
 
     @Primary
-    @Bean(name = "restObjectMapper")
     public ObjectMapper getObjectMapper() {
         ObjectMapper om = new ObjectMapper();
-        om.registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES));
-        om.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        om.registerModule(new JavaTimeModule());
-        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        om.configure(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS, true);
-        om.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);
-        om.registerModule(new Jdk8Module());
         return om;
     }
 
